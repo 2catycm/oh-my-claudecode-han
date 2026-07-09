@@ -1,67 +1,73 @@
 ---
 name: ultrawork
-description: Parallel execution engine for high-throughput task completion
+description: 超级工作模式（Ultrawork）— 面向高吞吐任务的并行执行引擎
 argument-hint: "<task description with parallel work items>"
 level: 4
 ---
 
+<概念说明>
+「超级工作模式（Ultrawork）」是一个**并行执行引擎**：把彼此独立的工作同时甩给多个 agent 去做，
+并按任务难度路由到合适的模型档位，从而缩短总耗时。它是一个可组合的"组件"，不是独立的持久模式 ——
+不含持久化、验证循环或长期状态管理（那些由 ralph、autopilot 在其之上叠加）。
+</概念说明>
+
 <Purpose>
-Ultrawork is a parallel execution engine and execution protocol for independent work. It emphasizes intent grounding, parallel context gathering, dependency-aware task graphs for non-trivial work, and concise evidence-backed execution summaries. It is a component, not a standalone persistence mode -- it provides parallelism and routing guidance, but not persistence, verification loops, or long-lived state management.
+超级工作模式（Ultrawork）是面向独立工作的并行执行引擎与执行协议。它强调意图锚定、并行的上下文收集、为非琐碎工作构建依赖感知的任务图，以及简洁的、有证据支撑的执行小结。它是一个组件，而非独立的持久模式 —— 它提供并行与路由指引，但不提供持久化、验证循环或长期状态管理。
 </Purpose>
 
 <Use_When>
-- Multiple independent tasks can run simultaneously
-- User says "ulw", "ultrawork", or wants parallel execution
-- You need to delegate work to multiple agents at once
-- Task benefits from concurrent execution but the user will manage completion themselves
+- 多个独立任务可同时运行
+- 用户说 "ulw"、"ultrawork"，或想要并行执行
+- 你需要一次委派工作给多个 agent
+- 任务受益于并发执行，但用户会自行掌控完成
 </Use_When>
 
 <Do_Not_Use_When>
-- Task requires guaranteed completion with verification -- use `ralph` instead (ralph includes ultrawork)
-- Task requires a full autonomous pipeline -- use `autopilot` instead (autopilot includes ralph which includes ultrawork)
-- There is only one sequential task with no parallelism opportunity -- delegate directly to an executor agent
-- User needs session persistence for resume -- use `ralph` which adds persistence on top of ultrawork
+- 任务要求"有验证地保证完成" —— 改用 `ralph`（ralph 已包含 ultrawork）
+- 任务需要完整的自主流水线 —— 改用 `autopilot`（autopilot 含 ralph，ralph 含 ultrawork）
+- 只有一个串行任务、无并行机会 —— 直接委派给 executor agent
+- 用户需要会话持久化以便恢复 —— 用 `ralph`，它在 ultrawork 之上叠加了持久化
 </Do_Not_Use_When>
 
 <Why_This_Exists>
-Sequential task execution wastes time when tasks are independent. Ultrawork enables firing multiple agents simultaneously and routing each to the right model tier, reducing total execution time while controlling token costs. It is designed as a composable component that ralph and autopilot layer on top of.
+当任务彼此独立时，串行执行是浪费时间。超级工作模式能同时发起多个 agent，并把每个路由到正确的模型档位，在控制 token 成本的同时缩短总执行时间。它被设计为可组合的组件，供 ralph 和 autopilot 在其之上分层。
 </Why_This_Exists>
 
 <Execution_Policy>
-- Fire all independent agent calls simultaneously -- never serialize independent work
-- Always pass the `model` parameter explicitly when delegating
-- Read `docs/shared/agent-tiers.md` before first delegation for agent selection guidance
-- Use `run_in_background: true` for operations over ~30 seconds (installs, builds, tests)
-- Run quick commands (git status, file reads, simple checks) in the foreground
-- Resolve intent and uncertainty before implementation; explore first, ask only when still blocked
-- For non-trivial tasks, produce a dependency-aware plan with parallel waves before execution
-- Keep delegated-task reports concise: short summary, files touched, verification status, blockers
-- Manual QA is required for implemented behavior, not just diagnostics
+- 同时发起所有独立的 agent 调用 —— 绝不把独立工作串行化
+- 委派时始终显式传 `model` 参数
+- 首次委派前读 `docs/shared/agent-tiers.md` 获取 agent 选择指引
+- 对超过约 30 秒的操作（安装、构建、测试）用 `run_in_background: true`
+- 快速命令（git status、读文件、简单检查）在前台运行
+- 实现前先厘清意图与不确定性；先探索，仍受阻时才发问
+- 对非琐碎任务，执行前产出带并行波次的依赖感知计划
+- 委派任务的报告保持简洁：简短小结、涉及文件、验证状态、阻塞项
+- 对已实现的行为需做手动 QA，而非仅诊断
 </Execution_Policy>
 
 <Steps>
-1. **Read agent reference**: Load `docs/shared/agent-tiers.md` for tier selection
-2. **Ground intent first**: Confirm whether the request is implementation, investigation, evaluation, or research; do not code before that is clear
-3. **Gather context in parallel**:
-   - direct tools for quick reads/searches
-   - exploration/docs agents for broad context
-4. **Classify tasks by independence**: Identify which tasks can run in parallel vs which have dependencies
-5. **Create a task graph for non-trivial work**:
-   - Parallel Execution Waves
-   - Dependency Matrix
-   - acceptance criteria and verification steps per task
-6. **Route to correct tiers**:
-   - Simple lookups/definitions: LOW tier (Haiku)
-   - Standard implementation: MEDIUM tier (Sonnet)
-   - Complex analysis/refactoring: HIGH tier (Opus)
-7. **Fire independent tasks simultaneously**: Launch all parallel-safe tasks at once
-8. **Run dependent tasks sequentially**: Wait for prerequisites before launching dependent work
-9. **Background long operations**: Builds, installs, and test suites use `run_in_background: true`
-10. **Verify when all tasks complete** (lightweight):
-   - Build/typecheck passes
-   - Affected tests pass
-   - Manual QA completed for implemented behavior
-   - No new errors introduced
+1. **读 agent 参考**：加载 `docs/shared/agent-tiers.md` 做档位选择
+2. **先锚定意图**：确认请求是实现、调查、评估还是研究；在此明确前不要编码
+3. **并行收集上下文**：
+   - 用直接工具做快速读取/搜索
+   - 用探索/文档 agent 获取广泛上下文
+4. **按独立性给任务分类**：识别哪些任务可并行、哪些有依赖
+5. **为非琐碎工作创建任务图**：
+   - 并行执行波次
+   - 依赖矩阵
+   - 每个任务的验收标准与验证步骤
+6. **路由到正确档位**：
+   - 简单查找/定义：LOW 档（Haiku）
+   - 标准实现：MEDIUM 档（Sonnet）
+   - 复杂分析/重构：HIGH 档（Opus）
+7. **同时发起独立任务**：一次性启动所有可并行的任务
+8. **串行运行依赖任务**：先等前置完成，再启动依赖工作
+9. **后台跑长操作**：构建、安装和测试套件用 `run_in_background: true`
+10. **所有任务完成后验证**（轻量）：
+   - 构建/类型检查通过
+   - 受影响的测试通过
+   - 已实现行为完成手动 QA
+   - 未引入新错误
 </Steps>
 
 <Tool_Usage>

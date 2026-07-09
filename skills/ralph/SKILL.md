@@ -1,6 +1,6 @@
 ---
 name: ralph
-description: Self-referential loop until task completion with configurable verification reviewer
+description: 永动循环（Ralph）— 自我引用的持续循环，反复推进直到任务完成，并由可配置的评审员验证
 argument-hint: "[--no-deslop] [--critic=architect|critic|codex] <task description>"
 level: 4
 ---
@@ -9,34 +9,41 @@ level: 4
 
 Your previous attempt did not output the completion promise. Continue working on the task.
 
+<概念说明>
+「永动循环（Ralph）」是本项目的一种**自主持续循环**执行模式。名字与"西西弗斯推巨石"的隐喻相关：
+循环会一遍遍推进任务，中途不停下来等你确认，直到目标真正达成（PRD 里每个用户故事都 `passes: true` 并通过评审）才收尾。
+你在过程中会看到形如 `The boulder never stops`（巨石永不停歇）的提示 —— 这只是"循环仍在运行"的信号，不是错误。
+一句话：**交给它一个必须彻底做完的任务，它会自动迭代到完成为止。**
+</概念说明>
+
 <Purpose>
-Ralph is a PRD-driven persistence loop that keeps working on a task until ALL user stories in prd.json have passes: true and are reviewer-verified. It wraps ultrawork's parallel execution with session persistence, automatic retry on failure, structured story tracking, and mandatory verification before completion.
+Ralph（永动循环）是一种 PRD 驱动的持续循环：不断推进任务，直到 prd.json 中所有用户故事都 passes: true 且通过评审员验证。它在 ultrawork 并行执行的基础上，叠加了会话持久化、失败自动重试、结构化的故事追踪，以及完成前的强制验证。
 </Purpose>
 
 <Use_When>
 
-- Task requires guaranteed completion with verification (not just "do your best")
-- User says "ralph", "don't stop", "must complete", "finish this", or "keep going until done"
-- Work may span multiple iterations and needs persistence across retries
-- Task benefits from structured PRD-driven execution with reviewer sign-off
+- 任务要求"有验证地保证完成"（而非仅"尽力而为"）
+- 用户说 "ralph"、"don't stop"、"must complete"、"finish this" 或 "keep going until done"（别停、必须完成、做完它、一直做到完）
+- 工作可能跨多轮迭代，需要在重试间保持持久
+- 任务受益于 PRD 驱动的结构化执行加评审员签核
   </Use_When>
 
 <Do_Not_Use_When>
 
-- User wants a full autonomous pipeline from idea to code -- use `autopilot` instead
-- User wants to explore or plan before committing -- use `plan` skill instead
-- User wants a quick one-shot fix -- delegate directly to an executor agent
-- User wants manual control over completion -- use `ultrawork` directly
-- User already has an active Claude Code `/goal` and only wants that native goal loop monitored -- adopt the existing `/goal` explicitly or use artifact-only Ultragoal notes instead of starting Ralph as a competing persistence loop
+- 用户想要从想法到代码的完整自主流水线 —— 改用 `autopilot`
+- 用户想在动手前先探索或规划 —— 改用 `plan` skill
+- 用户想要一次性快速修复 —— 直接委派给 executor agent
+- 用户想手动掌控完成时机 —— 直接用 `ultrawork`
+- 用户已有活跃的 Claude Code `/goal`，只想监控那个原生目标循环 —— 显式采用现有 `/goal`，或用仅制品的 Ultragoal 笔记，而非另起一个与之竞争的 Ralph 持久循环
   </Do_Not_Use_When>
 
 <Why_This_Exists>
-Complex tasks often fail silently: partial implementations get declared "done", tests get skipped, edge cases get forgotten. Ralph prevents this by:
+复杂任务常常静默失败：半成品被宣布"完成"、测试被跳过、边界情况被遗忘。Ralph 通过以下方式防止这种情况：
 
-1. Structuring work into discrete user stories with testable acceptance criteria (prd.json)
-2. Iterating story-by-story until each one passes
-3. Tracking progress and learnings across iterations (progress.txt)
-4. Requiring fresh reviewer verification against specific acceptance criteria before completion
+1. 把工作组织为带可测试验收标准的离散用户故事（prd.json）
+2. 逐个故事迭代，直到每个都通过
+3. 跨迭代追踪进度与经验（progress.txt）
+4. 完成前，要求评审员对照具体验收标准做最新验证
    </Why_This_Exists>
 
 <PRD_Mode>
