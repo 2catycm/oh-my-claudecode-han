@@ -1,6 +1,6 @@
 ---
 name: omc-setup
-description: Install or refresh oh-my-claudecode for plugin, npm, and local-dev setups from the canonical setup flow
+description: 按标准安装流程为插件、npm 和本地开发环境安装或刷新 oh-my-claudecode
 level: 2
 ---
 

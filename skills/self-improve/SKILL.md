@@ -1,6 +1,6 @@
 ---
 name: self-improve
-description: Autonomous evolutionary code improvement engine with tournament selection
+description: 自主进化式代码改进引擎，带锦标赛选择
 level: 4
 ---
 

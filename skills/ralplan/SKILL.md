@@ -1,6 +1,6 @@
 ---
 name: ralplan
-description: Consensus planning entrypoint that auto-gates vague ralph/autopilot/team requests before execution
+description: 共识规划入口 — 在执行前，自动为含糊的 ralph/autopilot/team 请求设闸把关
 argument-hint: "[--interactive] [--deliberate] [--architect codex] [--critic codex] <task description>"
 level: 4
 ---

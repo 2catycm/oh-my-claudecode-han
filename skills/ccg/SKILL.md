@@ -1,6 +1,6 @@
 ---
 name: ccg
-description: Claude-Codex-Gemini tri-model orchestration via /ask codex + /ask antigravity (or gemini), then Claude synthesizes results
+description: Claude-Codex-Gemini 三模型协同 — 经 /ask codex + /ask antigravity（或 gemini）取意见，再由 Claude 综合结果
 level: 5
 ---
 

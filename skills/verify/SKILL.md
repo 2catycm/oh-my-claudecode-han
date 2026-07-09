@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Verify that a change really works before you claim completion
+description: 在声称完成前，验证一处改动是否真的可用
 ---
 
 # Verify

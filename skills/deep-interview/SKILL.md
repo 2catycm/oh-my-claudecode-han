@@ -1,6 +1,6 @@
 ---
 name: deep-interview
-description: Socratic deep interview with mathematical ambiguity gating before explicit execution approval
+description: 苏格拉底式深度访谈 — 在明确批准执行前，用量化的歧义度设闸把关
 argument-hint: "[--quick|--standard|--deep] [--autoresearch] <idea or vague description>"
 pipeline: [deep-interview, plan]
 handoff-policy: approval-required

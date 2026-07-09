@@ -1,6 +1,6 @@
 ---
 name: ultragoal
-description: Durable multi-goal workflow that persists plan/ledger artifacts under .omc/ultragoal and prints Claude /goal handoff text for the active session
+description: 持久化的多目标工作流 — 把计划/账本制品持久化到 .omc/ultragoal，并为当前会话打印 Claude /goal 交接文本
 argument-hint: "<brief or subcommand>"
 level: 3
 ---

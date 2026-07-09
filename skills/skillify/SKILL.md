@@ -1,7 +1,7 @@
 ---
 name: skillify
 aliases: [learner]
-description: Turn a repeatable workflow from the current session into a reusable OMC skill draft
+description: 把当前会话中可复用的工作流，转成一份可复用的 OMC skill 草稿
 ---
 
 # Skillify

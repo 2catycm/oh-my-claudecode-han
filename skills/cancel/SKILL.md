@@ -1,7 +1,7 @@
 ---
 name: cancel
 aliases: [cancel-ralph]
-description: Cancel any active OMC mode (autopilot, ralph, ultrawork, ultraqa, swarm, ultrapilot, pipeline, team)
+description: 取消任何活跃的 OMC 模式（autopilot、ralph、ultrawork、ultraqa、swarm、ultrapilot、pipeline、team）
 argument-hint: "[--force|--all]"
 level: 2
 ---

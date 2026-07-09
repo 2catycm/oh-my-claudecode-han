@@ -1,6 +1,6 @@
 ---
 name: remember
-description: Review reusable project knowledge and decide what belongs in project memory, notepad, or durable docs
+description: 梳理可复用的项目知识，决定哪些归入项目记忆、notepad 或持久文档
 ---
 
 # Remember

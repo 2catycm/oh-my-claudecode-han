@@ -1,6 +1,6 @@
 ---
 name: deep-dive
-description: "2-stage pipeline: trace (causal investigation) -> deep-interview (requirements crystallization) with 3-point injection"
+description: "2 阶段流水线：trace（因果调查）-> deep-interview（需求结晶化），带 3 点注入"
 argument-hint: "<problem or exploration target>"
 triggers:
   - "deep dive"

@@ -1,6 +1,6 @@
 ---
 name: autoresearch
-description: Stateful single-mission improvement loop with strict evaluator contract, markdown decision logs, and max-runtime stop behavior
+description: 有状态的单任务改进循环 — 严格的评估器契约、markdown 决策日志，并有最大运行时长停止行为
 argument-hint: "[--mission-dir <path>] [--max-runtime <duration>] [--cron <spec>] [--resume <run-id>]"
 level: 4
 ---

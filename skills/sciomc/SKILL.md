@@ -1,6 +1,6 @@
 ---
 name: sciomc
-description: Orchestrate parallel scientist agents for comprehensive analysis with AUTO mode
+description: 编排并行的数据科学家 agent 做全面分析，含 AUTO 模式
 argument-hint: <research goal>
 level: 4
 ---

@@ -1,6 +1,6 @@
 ---
 name: omc-reference
-description: OMC agent catalog, available tools, team pipeline routing, commit protocol, and skills registry. Auto-loads when delegating to agents, using OMC tools, orchestrating teams, making commits, or invoking skills.
+description: OMC 的 agent 目录、可用工具、团队流水线路由、提交协议和 skill 注册表。在委派 agent、使用 OMC 工具、编排团队、提交或调用 skill 时自动加载。
 user-invocable: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: learner
-description: Extract a learned skill from the current conversation
+description: 从当前对话中提炼出一个可复用的 skill
 level: 7
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: deepinit
-description: Deep codebase initialization with hierarchical AGENTS.md documentation
+description: 深度代码库初始化 — 生成分层的 AGENTS.md 文档
 level: 4
 ---
 

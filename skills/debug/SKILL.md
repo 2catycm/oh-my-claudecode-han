@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Diagnose the current OMC session or repo state using logs, traces, state, and focused reproduction
+description: 用日志、trace、状态和聚焦复现，诊断当前 OMC 会话或仓库状态
 ---
 
 # Debug

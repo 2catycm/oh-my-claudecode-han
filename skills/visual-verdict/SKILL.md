@@ -1,6 +1,6 @@
 ---
 name: visual-verdict
-description: Structured visual QA verdict for screenshot-to-reference comparisons
+description: 面向截图与参考图对比的结构化视觉 QA 结论
 level: 2
 ---
 

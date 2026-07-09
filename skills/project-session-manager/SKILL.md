@@ -1,6 +1,6 @@
 ---
 name: project-session-manager
-description: Worktree-first dev environment manager for issues, PRs, and features with optional tmux sessions
+description: worktree 优先的开发环境管理器，管理 issue、PR 和功能，可选 tmux 会话
 aliases: [psm]
 level: 2
 ---
