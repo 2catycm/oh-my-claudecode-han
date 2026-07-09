@@ -4,6 +4,10 @@ description: 共识规划入口 — 在执行前，自动为含糊的 ralph/auto
 argument-hint: "[--interactive] [--deliberate] [--architect codex] [--critic codex] <task description>"
 level: 4
 ---
+<概念说明>
+「共识规划（Ralplan）」是执行前的把关闸门：当 ralph/autopilot/team 的请求还很含糊时，先经 规划师→架构师→评审专家 三方达成共识，产出经验证的计划，再交给执行。
+</概念说明>
+
 
 # Ralplan (Consensus Planning Alias)
 

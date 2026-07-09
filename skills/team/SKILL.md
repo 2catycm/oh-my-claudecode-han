@@ -5,6 +5,10 @@ argument-hint: "[N:agent-type] [ralph] <task description>"
 aliases: []
 level: 4
 ---
+<概念说明>
+「团队协作（Team）」把一个任务拆给 N 个 Claude Code agent，让它们围绕一份共享任务清单分工并行推进，像一个小团队协作，而非你一个人干。
+</概念说明>
+
 
 # Team Skill
 

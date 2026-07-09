@@ -4,6 +4,10 @@ description: QA 循环工作流 — 测试、验证、修复，反复循环直�
 argument-hint: "[--tests|--build|--lint|--typecheck|--custom <pattern>] [--interactive]"
 level: 3
 ---
+<概念说明>
+「UltraQA」是一个质量保障循环：构建 → 测试 → 发现失败 → 修复，反复循环，直到全部通过或达成目标为止。
+</概念说明>
+
 
 # UltraQA Skill
 

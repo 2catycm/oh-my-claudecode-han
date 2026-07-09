@@ -3,6 +3,10 @@ name: ccg
 description: Claude-Codex-Gemini 三模型协同 — 经 /ask codex + /ask antigravity（或 gemini）取意见，再由 Claude 综合结果
 level: 5
 ---
+<概念说明>
+「CCG」= Claude + Codex + Gemini 三模型协同：同一问题分别问 Codex 和 Gemini（或 Antigravity）拿到不同视角，再由 Claude 综合成一个更可靠的答案。适合高风险决策的交叉验证。
+</概念说明>
+
 
 # CCG - Claude-Codex-Gemini Tri-Model Orchestration
 

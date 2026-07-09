@@ -7,6 +7,10 @@ handoff-policy: approval-required
 handoff: .omc/specs/deep-interview-{slug}.md
 level: 3
 ---
+<概念说明>
+「深度访谈（Deep Interview）」用苏格拉底式追问澄清需求：在你明确批准执行前，通过一轮轮提问把歧义降到可量化的低点，避免需求理解偏差。
+</概念说明>
+
 
 <Purpose>
 Deep Interview implements Ouroboros-inspired Socratic questioning with mathematical ambiguity scoring. It replaces vague ideas with crystal-clear specifications by asking targeted questions that expose hidden assumptions, measuring clarity across weighted dimensions, and refusing to proceed until ambiguity drops below the resolved threshold for this run. The output feeds into a gated pipeline: **deep-interview → omc-plan consensus refinement → pending approval → explicitly approved execution**, ensuring maximum clarity before any mutation starts.
