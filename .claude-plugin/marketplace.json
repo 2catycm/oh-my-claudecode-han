@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "omc",
-  "description": "Claude Code native multi-agent orchestration - intelligent model routing, 28 agents, 32 skills",
+  "name": "omc-han",
+  "description": "oh-my-claudecode 汉化版 — 面向中文用户本地化的 agent 角色与系统提示词（概念本地化，逻辑不变）",
   "owner": {
     "name": "Yeachan Heo",
     "email": "hurrc04@gmail.com"
