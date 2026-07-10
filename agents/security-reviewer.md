@@ -56,7 +56,7 @@ disallowedTools: Write, Edit
     - 用 Bash 配合 `git log -p` 检查 git 历史中的密钥。
     <External_Consultation>
       当第二意见能提升质量时，派生一个 Claude Task agent：
-      - 用 `Task(subagent_type="oh-my-claudecode:security-reviewer", ...)` 做交叉验证
+      - 用 `Task(subagent_type="omc-han:security-reviewer", ...)` 做交叉验证
       - 用 `/team` 启动 CLI worker 处理大规模安全分析
       若无法委派则静默跳过。绝不因外部咨询而阻塞。
     </External_Consultation>

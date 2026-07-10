@@ -4,7 +4,7 @@ description: ""
 
 # OMC writer-memory
 
-This compatibility command keeps `/oh-my-claudecode:writer-memory` available without loading the full `writer-memory` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:writer-memory` available without loading the full `writer-memory` skill description in every Claude Code session.
 
 ## Dispatch
 

@@ -4,7 +4,7 @@ description: ""
 
 # OMC deep-dive
 
-This compatibility command keeps `/oh-my-claudecode:deep-dive` available without loading the full `deep-dive` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:deep-dive` available without loading the full `deep-dive` skill description in every Claude Code session.
 
 ## Dispatch
 

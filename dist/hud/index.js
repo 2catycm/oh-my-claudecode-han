@@ -177,7 +177,7 @@ function showDiagnostic() {
     console.log(`  HUD script:  ${hudExists ? "installed" : "MISSING"}`);
     console.log(`  statusLine:  ${statusLineOk ? "configured" : "NOT configured"}`);
     if (!hudExists || !statusLineOk) {
-        console.log("  Run /oh-my-claudecode:hud setup to fix.");
+        console.log("  Run /omc-han:hud setup to fix.");
     }
     else {
         console.log("  HUD renders automatically inside Claude Code sessions.");

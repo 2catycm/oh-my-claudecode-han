@@ -5,7 +5,7 @@ argument-hint: "[optional compaction note]"
 
 # OMC 手动上下文压缩助手
 
-本命令刻意使用插件作用域的名字 `/oh-my-claudecode:compact`，而非裸的 `/compact`。裸 `/compact` 保留给 Claude Code 的原生压缩命令，OMC 不得遮蔽它。
+本命令刻意使用插件作用域的名字 `/omc-han:compact`，而非裸的 `/compact`。裸 `/compact` 保留给 Claude Code 的原生压缩命令，OMC 不得遮蔽它。
 
 OMC 无法从插件命令中调用 Claude Code 内置的 `/compact`：`/compact` 是原生斜杠命令，而非提示型 skill，对 `compact` 的提示型 skill 调用不是受支持的交接方式。本助手仅提供指引，且不得声称 OMC 自己触发了压缩。
 

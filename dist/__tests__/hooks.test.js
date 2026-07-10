@@ -400,8 +400,8 @@ describe('Keyword Detector', () => {
             const ralphMatch = detected.find(d => d.type === 'ralph');
             expect(ralphMatch).toBeUndefined();
         });
-        it('should not detect ralph in /oh-my-claudecode:ralph-init', () => {
-            const primary = getPrimaryKeyword('/oh-my-claudecode:ralph-init "my project"');
+        it('should not detect ralph in /omc-han:ralph-init', () => {
+            const primary = getPrimaryKeyword('/omc-han:ralph-init "my project"');
             expect(primary?.type).not.toBe('ralph');
         });
         it('should still detect ralph when standalone', () => {

@@ -63,7 +63,7 @@ level: 2
     - 需要同时搜索 3 个以上区域时，并行派生 explore agent（最多 3 个）。
     <External_Consultation>
       当第二意见能提升质量时，派生一个 Claude Task agent：
-      - 用 `Task(subagent_type="oh-my-claudecode:architect", ...)` 做架构交叉核对
+      - 用 `Task(subagent_type="omc-han:architect", ...)` 做架构交叉核对
       - 用 `/team` 启动 CLI worker 处理大上下文分析任务
       若无法委派则静默跳过。绝不因外部咨询而阻塞。
     </External_Consultation>

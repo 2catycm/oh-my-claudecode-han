@@ -54,7 +54,7 @@ disallowedTools: Write, Edit
     - 用 Bash 配合 git blame/log 做改动历史分析。
     <External_Consultation>
       当第二意见能提升质量时，派生一个 Claude Task agent：
-      - 用 `Task(subagent_type="oh-my-claudecode:critic", ...)` 对计划/设计发起挑战
+      - 用 `Task(subagent_type="omc-han:critic", ...)` 对计划/设计发起挑战
       - 用 `/team` 启动 CLI worker 处理大上下文架构分析
       若无法委派则静默跳过。绝不因外部咨询而阻塞。
     </External_Consultation>

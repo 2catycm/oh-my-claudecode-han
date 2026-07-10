@@ -945,7 +945,7 @@ describe("Stop Hook Blocking Contract", () => {
             const reason = String(output.reason || "");
             expect(output.decision).toBe("block");
             expect(reason).toContain("[ULTRAWORK #1/");
-            expect(reason).toContain("/oh-my-claudecode:cancel");
+            expect(reason).toContain("/omc-han:cancel");
             expect(reason).not.toContain("\nTask:");
         });
         it("returns continue: true for tombstoned stale ultrawork state", () => {
@@ -1081,7 +1081,7 @@ describe("Stop Hook Blocking Contract", () => {
             mkdirSync(sessionDir, { recursive: true });
             writeFileSync(autopilotPath, JSON.stringify({
                 active: true,
-                original_prompt: "/oh-my-claudecode:autopilot execute",
+                original_prompt: "/omc-han:autopilot execute",
                 session_id: sessionId,
                 started_at: new Date().toISOString(),
                 last_checked_at: new Date().toISOString(),
@@ -1100,7 +1100,7 @@ describe("Stop Hook Blocking Contract", () => {
             writeFileSync(autopilotPath, JSON.stringify({
                 active: true,
                 phase: "expansion",
-                original_prompt: "/oh-my-claudecode:autopilot execute",
+                original_prompt: "/omc-han:autopilot execute",
                 session_id: sessionId,
                 started_at: new Date().toISOString(),
                 last_checked_at: new Date().toISOString(),
@@ -1166,7 +1166,7 @@ describe("Stop Hook Blocking Contract", () => {
                 active: true,
                 session_id: sessionId,
                 current_phase: "ralplan",
-                original_prompt: "/oh-my-claudecode:ralplan issue #2622",
+                original_prompt: "/omc-han:ralplan issue #2622",
                 awaiting_confirmation: true,
                 awaiting_confirmation_set_at: new Date().toISOString(),
                 started_at: new Date().toISOString(),
@@ -1408,7 +1408,7 @@ describe("Stop Hook Blocking Contract", () => {
             const reason = String(output.reason || "");
             expect(output.decision).toBe("block");
             expect(reason).toContain("[ULTRAWORK #1/");
-            expect(reason).toContain("/oh-my-claudecode:cancel");
+            expect(reason).toContain("/omc-han:cancel");
             expect(reason).not.toContain("\nTask:");
         });
         it("uses current_phase when autopilot phase is missing in cjs script", () => {
@@ -1471,7 +1471,7 @@ describe("Stop Hook Blocking Contract", () => {
             mkdirSync(sessionDir, { recursive: true });
             writeFileSync(autopilotPath, JSON.stringify({
                 active: true,
-                original_prompt: "/oh-my-claudecode:autopilot execute",
+                original_prompt: "/omc-han:autopilot execute",
                 session_id: sessionId,
                 started_at: new Date().toISOString(),
                 last_checked_at: new Date().toISOString(),
@@ -1490,7 +1490,7 @@ describe("Stop Hook Blocking Contract", () => {
             writeFileSync(autopilotPath, JSON.stringify({
                 active: true,
                 phase: "expansion",
-                original_prompt: "/oh-my-claudecode:autopilot execute",
+                original_prompt: "/omc-han:autopilot execute",
                 session_id: sessionId,
                 started_at: new Date().toISOString(),
                 last_checked_at: new Date().toISOString(),
@@ -1676,7 +1676,7 @@ describe("Stop Hook Blocking Contract", () => {
             });
             expect(output.decision).toBe("block");
             expect(output.reason).toContain("AUTOPILOT");
-            expect(output.reason).not.toContain('/oh-my-claudecode:cancel');
+            expect(output.reason).not.toContain('/omc-han:cancel');
         });
         it("auto-deactivates ultrawork state when no incomplete work remains in cjs script", () => {
             const sessionId = "ulw-complete-cjs";

@@ -50,9 +50,9 @@ description: Setup router
 
 ## Routing
 
-- doctor -> /oh-my-claudecode:omc-doctor with remaining args
-- mcp -> /oh-my-claudecode:mcp-setup with remaining args
-- otherwise -> /oh-my-claudecode:omc-setup with remaining args`);
+- doctor -> /omc-han:omc-doctor with remaining args
+- mcp -> /omc-han:mcp-setup with remaining args
+- otherwise -> /omc-han:omc-setup with remaining args`);
         const { executeSlashCommand } = await loadExecutor();
         const result = executeSlashCommand({
             command: 'setup',
@@ -60,7 +60,7 @@ description: Setup router
             raw: '/setup doctor --json',
         });
         expect(result.success).toBe(true);
-        expect(result.replacementText).toContain('doctor -> /oh-my-claudecode:omc-doctor with remaining args');
+        expect(result.replacementText).toContain('doctor -> /omc-han:omc-doctor with remaining args');
         expect(result.replacementText).not.toContain('{{ARGUMENTS_AFTER_DOCTOR}}');
         expect(result.replacementText).not.toContain('{{ARGUMENTS_AFTER_MCP}}');
     });
@@ -169,7 +169,7 @@ Deep interview body`);
         expect(result.replacementText).toContain('## Skill Pipeline');
         expect(result.replacementText).toContain('Pipeline: `deep-interview → plan → autopilot`');
         expect(result.replacementText).toContain('Next skill arguments: `--consensus --direct`');
-        expect(result.replacementText).toContain('Skill("oh-my-claudecode:plan")');
+        expect(result.replacementText).toContain('Skill("omc-han:plan")');
         expect(result.replacementText).toContain('`.omc/specs/deep-interview-{slug}.md`');
     });
     it('discovers project-local compatibility skills from .agents/skills', async () => {
@@ -245,7 +245,7 @@ Deep interview body`);
         });
         expect(result.success).toBe(true);
         expect(result.replacementText).toContain('## Autoresearch Setup Mode');
-        expect(result.replacementText).toContain('Skill("oh-my-claudecode:autoresearch")');
+        expect(result.replacementText).toContain('Skill("omc-han:autoresearch")');
         expect(result.replacementText).toContain('Mission seed from invocation: `improve startup performance`');
         expect(result.replacementText).not.toContain('## Skill Pipeline');
     });
@@ -267,7 +267,7 @@ Deep interview body`);
         });
         expect(result.success).toBe(true);
         expect(result.replacementText)
-            .toContain('Skill("oh-my-claudecode:autoresearch")');
+            .toContain('Skill("omc-han:autoresearch")');
     });
     it('routes /ccg advisor asks through the plugin bridge inside an active Claude session when CLAUDE_PLUGIN_ROOT is set', async () => {
         process.env.CLAUDE_PLUGIN_ROOT = '/plugin-root';

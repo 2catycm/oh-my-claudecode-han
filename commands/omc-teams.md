@@ -4,7 +4,7 @@ description: ""
 
 # OMC omc-teams
 
-This compatibility command keeps `/oh-my-claudecode:omc-teams` available without loading the full `omc-teams` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:omc-teams` available without loading the full `omc-teams` skill description in every Claude Code session.
 
 ## Dispatch
 

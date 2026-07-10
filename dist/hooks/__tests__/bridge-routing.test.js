@@ -329,7 +329,7 @@ Read src/hooks/bridge.ts first.`,
                     prompt: `Investigate why this pasted transcript branched sessions:
 
 [MAGIC KEYWORD: RALPH]
-Skill: oh-my-claudecode:ralph
+Skill: omc-han:ralph
 User request:
 ralph fix parser`,
                     directory: tempDir,
@@ -440,7 +440,7 @@ $ ultrawork search the codebase`,
                 const input = {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:ralph' },
+                    toolInput: { skill: 'omc-han:ralph' },
                     directory: tempDir,
                 };
                 const result = await processHook('post-tool-use', input);
@@ -514,7 +514,7 @@ $ ultrawork search the codebase`,
                 const result = await processHook('pre-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:ralph' },
+                    toolInput: { skill: 'omc-han:ralph' },
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);
@@ -537,7 +537,7 @@ $ ultrawork search the codebase`,
                 const result = await processHook('pre-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:ralplan' },
+                    toolInput: { skill: 'omc-han:ralplan' },
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);
@@ -617,7 +617,7 @@ $ ultrawork search the codebase`,
                 const sessionId = 'ralplan-slash-session';
                 const result = await processHook('keyword-detector', {
                     sessionId,
-                    prompt: '/oh-my-claudecode:ralplan issue #2622',
+                    prompt: '/omc-han:ralplan issue #2622',
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);
@@ -626,7 +626,7 @@ $ ultrawork search the codebase`,
                 expect(result.message).toBeUndefined();
                 expect(hookSpecificOutput.hookEventName).toBe('UserPromptSubmit');
                 expect(hookSpecificOutput.additionalContext).toContain('[RALPLAN INIT]');
-                expect(hookSpecificOutput.additionalContext).toContain('/oh-my-claudecode:ralplan issue #2622');
+                expect(hookSpecificOutput.additionalContext).toContain('/omc-han:ralplan issue #2622');
                 const ralplanPath = join(tempDir, '.omc', 'state', 'sessions', sessionId, 'ralplan-state.json');
                 expect(existsSync(ralplanPath)).toBe(true);
                 const ralplanState = JSON.parse(readFileSync(ralplanPath, 'utf-8'));
@@ -713,7 +713,7 @@ $ ultrawork search the codebase`,
                     sessionId,
                     toolName: 'Skill',
                     toolInput: {
-                        skill: 'oh-my-claudecode:plan',
+                        skill: 'omc-han:plan',
                         args: '--consensus issue #1926',
                     },
                     directory: tempDir,
@@ -738,13 +738,13 @@ $ ultrawork search the codebase`,
                 await processHook('pre-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:ralplan' },
+                    toolInput: { skill: 'omc-han:ralplan' },
                     directory: tempDir,
                 });
                 const postResult = await processHook('post-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:ralplan' },
+                    toolInput: { skill: 'omc-han:ralplan' },
                     toolOutput: { ok: true },
                     directory: tempDir,
                 });
@@ -774,7 +774,7 @@ $ ultrawork search the codebase`,
                 const sessionId = 'di-slash-session';
                 const result = await processHook('keyword-detector', {
                     sessionId,
-                    prompt: '/oh-my-claudecode:deep-interview explore auth flows',
+                    prompt: '/omc-han:deep-interview explore auth flows',
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);
@@ -811,7 +811,7 @@ $ ultrawork search the codebase`,
                 rmSync(tempDir, { recursive: true, force: true });
             }
         });
-        it('seeds workflow slot when Skill tool invokes oh-my-claudecode:deep-interview', async () => {
+        it('seeds workflow slot when Skill tool invokes omc-han:deep-interview', async () => {
             const tempDir = mkdtempSync(join(tmpdir(), 'bridge-routing-di-skill-'));
             try {
                 execFileSync('git', ['init'], { cwd: tempDir, stdio: 'pipe' });
@@ -819,7 +819,7 @@ $ ultrawork search the codebase`,
                 const result = await processHook('pre-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:deep-interview' },
+                    toolInput: { skill: 'omc-han:deep-interview' },
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);
@@ -834,7 +834,7 @@ $ ultrawork search the codebase`,
                 rmSync(tempDir, { recursive: true, force: true });
             }
         });
-        it('seeds workflow slot when Skill tool invokes oh-my-claudecode:self-improve', async () => {
+        it('seeds workflow slot when Skill tool invokes omc-han:self-improve', async () => {
             const tempDir = mkdtempSync(join(tmpdir(), 'bridge-routing-si-skill-'));
             try {
                 execFileSync('git', ['init'], { cwd: tempDir, stdio: 'pipe' });
@@ -842,7 +842,7 @@ $ ultrawork search the codebase`,
                 const result = await processHook('pre-tool-use', {
                     sessionId,
                     toolName: 'Skill',
-                    toolInput: { skill: 'oh-my-claudecode:self-improve' },
+                    toolInput: { skill: 'omc-han:self-improve' },
                     directory: tempDir,
                 });
                 expect(result.continue).toBe(true);

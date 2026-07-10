@@ -8,7 +8,7 @@ description: 把当前会话中可复用的工作流，转成一份可复用的 
 
 Use this skill when the current session uncovered a repeatable workflow that should become a reusable OMC skill.
 
-> Compatibility: `/oh-my-claudecode:learner` is a deprecated alias for this skill. Prefer `/oh-my-claudecode:skillify` in docs, prompts, and new workflows. Internal implementation modules may still use the learner name.
+> Compatibility: `/omc-han:learner` is a deprecated alias for this skill. Prefer `/omc-han:skillify` in docs, prompts, and new workflows. Internal implementation modules may still use the learner name.
 
 ## Goal
 Capture a successful multi-step workflow as a concrete skill draft instead of rediscovering it later.

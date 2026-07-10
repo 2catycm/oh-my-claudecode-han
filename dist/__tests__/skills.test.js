@@ -246,7 +246,7 @@ describe('Builtin Skills', () => {
             expect(skill).toBeDefined();
             expect(skill?.description).toContain('install/update routing');
             expect(skill?.template).toContain('Process the request by the **first argument only**');
-            expect(skill?.template).toContain('/oh-my-claudecode:setup doctor --json');
+            expect(skill?.template).toContain('/omc-han:setup doctor --json');
             expect(skill?.template).not.toContain('{{ARGUMENTS_AFTER_DOCTOR}}');
         });
         it('should emphasize worktree-first guidance in project session manager skill text', () => {
@@ -303,7 +303,7 @@ describe('Builtin Skills', () => {
             expect(skill?.template).toContain('personal-config/shared-config/external/project-scoped');
             expect(skill?.template).toContain('Cross-boundary MOVE candidates MUST have `Default? = no`');
             // Verify pipeline handoff is fully wired (B1 fix)
-            expect(skill?.template).toContain('Skill("oh-my-claudecode:autopilot")');
+            expect(skill?.template).toContain('Skill("omc-han:autopilot")');
             expect(skill?.template).toContain('consensus plan as Phase 0+1 output');
             // Verify Phase 5 workflow pre-flight guards issue/worktree-driven project guidance (#2926)
             expect(skill?.template).toContain('Workflow Pre-Flight');
@@ -336,8 +336,8 @@ describe('Builtin Skills', () => {
             expect(skill?.template).toContain('unless the user explicitly approves that next step');
             expect(skill?.template).not.toContain('Pipeline: `deep-interview → plan → autopilot`');
             expect(skill?.template).not.toContain('Next skill: `plan`');
-            expect(skill?.template).not.toContain('3. Invoke Skill("oh-my-claudecode:plan")');
-            expect(skill?.template).toContain('Only after the user selects this option, invoke `Skill("oh-my-claudecode:plan")`');
+            expect(skill?.template).not.toContain('3. Invoke Skill("omc-han:plan")');
+            expect(skill?.template).toContain('Only after the user selects this option, invoke `Skill("omc-han:plan")`');
             expect(skill?.template).toContain('do not automatically invoke autopilot or any other execution skill');
             expect(skill?.template).toContain('`.omc/specs/deep-interview-{slug}.md`');
             expect(skill?.template).toContain('Why now: {one_sentence_targeting_rationale}');
@@ -346,7 +346,7 @@ describe('Builtin Skills', () => {
             expect(skill?.template).toContain('Every round explicitly names the weakest dimension and why it is the next target');
             expect(skill?.argumentHint).toContain('--autoresearch');
             expect(skill?.template).toContain('zero-learning-curve setup lane for the stateful `autoresearch` skill');
-            expect(skill?.template).toContain('Skill("oh-my-claudecode:autoresearch")');
+            expect(skill?.template).toContain('Skill("omc-han:autoresearch")');
         });
         it('documents deep-interview Round 0 topology locking and multi-component scoring (issue #2919)', () => {
             const skill = getBuiltinSkill('deep-interview');
@@ -449,9 +449,9 @@ describe('Builtin Skills', () => {
         it('ships a config-aware deep-interview SKILL.md for native skill-loader paths (issues #2723, #3030)', () => {
             const raw = readFileSync(join(originalCwd, 'skills', 'deep-interview', 'SKILL.md'), 'utf-8');
             expect(raw).toContain('Native Plugin Invocation Guard (Issue #3030)');
-            expect(raw).toContain('`/oh-my-claudecode:deep-interview` or `Skill("oh-my-claudecode:deep-interview")`');
+            expect(raw).toContain('`/omc-han:deep-interview` or `Skill("omc-han:deep-interview")`');
             expect(raw).toContain('The user-facing preferred invocation is `/deep-interview`');
-            expect(raw).toContain('do not recommend or advertise `/oh-my-claudecode:deep-interview`');
+            expect(raw).toContain('do not recommend or advertise `/omc-han:deep-interview`');
             expect(raw).toContain('Phase 0 below remains blocking');
             expect(raw).toContain('must resolve `omc.deepInterview.ambiguityThreshold` from settings');
             expect(raw).toContain('Phase 0: Resolve Ambiguity Threshold (blocking prerequisite)');
@@ -510,7 +510,7 @@ describe('Builtin Skills', () => {
             process.env.CLAUDE_CONFIG_DIR = profileDir;
             writeFileSync(join(profileDir, 'settings.json'), JSON.stringify({ omc: { deepInterview: { ambiguityThreshold: 0.17 } } }));
             clearSkillsCache();
-            const rendered = renderBundledSkillBody('oh-my-claudecode:deep-interview', [
+            const rendered = renderBundledSkillBody('omc-han:deep-interview', [
                 'State:',
                 '"threshold": 0.2,',
                 'Announcement: We\'ll proceed to execution once ambiguity drops below 20%.',
@@ -603,7 +603,7 @@ describe('Builtin Skills', () => {
                 expect(deepInterviewSkill?.template)
                     .toContain('zero-learning-curve setup lane for the stateful `autoresearch` skill');
                 expect(deepInterviewSkill?.template)
-                    .toContain('Skill("oh-my-claudecode:autoresearch")');
+                    .toContain('Skill("omc-han:autoresearch")');
                 expect(askSkill?.template)
                     .toContain('node "$CLAUDE_PLUGIN_ROOT"/bridge/cli.cjs ask {{ARGUMENTS}}');
             }
@@ -646,8 +646,8 @@ describe('Builtin Skills', () => {
             expect(skill?.template).toContain('This stage is approval-gated');
             expect(skill?.template).toContain('unless the user explicitly approves that next step');
             expect(skill?.template).not.toContain('Next skill: `autopilot`');
-            expect(skill?.template).not.toContain('Skill("oh-my-claudecode:autopilot")');
-            expect(skill?.template).not.toContain('3. Invoke Skill("oh-my-claudecode:autopilot")');
+            expect(skill?.template).not.toContain('Skill("omc-han:autopilot")');
+            expect(skill?.template).not.toContain('3. Invoke Skill("omc-han:autopilot")');
             expect(skill?.template).toContain('`.omc/plans/ralplan-*.md`');
         });
         it('should expose review mode guidance for ai-slop-cleaner', () => {
@@ -696,7 +696,7 @@ describe('Builtin Skills', () => {
             expect(skill).toBeDefined();
             expect(skill?.template).toContain('/omc-teams` only supports **`claude`**, **`codex`**, **`gemini`**, **`antigravity`**, **`grok`**, and **`cursor`**');
             expect(skill?.template).toContain('unsupported type such as `expert`');
-            expect(skill?.template).toContain('/oh-my-claudecode:team');
+            expect(skill?.template).toContain('/omc-han:team');
             expect(skill?.template).toContain('Cursor workers as executor-style only');
             expect(skill?.template).toContain('cursor-agent');
         });

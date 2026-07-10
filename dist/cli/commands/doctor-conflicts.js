@@ -543,7 +543,7 @@ export function formatReport(report, json) {
         }
         else {
             lines.push(`  ${colors.yellow('⚠')} No OMC markers found`);
-            lines.push(`    ${colors.gray('Run /oh-my-claudecode:omc-setup to add markers')}`);
+            lines.push(`    ${colors.gray('Run /omc-han:omc-setup to add markers')}`);
             if (report.claudeMdStatus.hasUserContent) {
                 lines.push(`  ${colors.blue('ℹ')} User content present - will be preserved`);
             }
@@ -592,7 +592,7 @@ export function formatReport(report, json) {
             lines.push(`    - ${hook.event} ${colors.gray(`(${hook.pluginRoot})`)}`);
             lines.push(`      ${colors.gray(hook.command)}`);
         }
-        lines.push(`    ${colors.gray('Run /oh-my-claudecode:omc-setup or update/reinstall the plugin to rewrite hooks to direct node run.cjs commands.')}`);
+        lines.push(`    ${colors.gray('Run /omc-han:omc-setup or update/reinstall the plugin to rewrite hooks to direct node run.cjs commands.')}`);
         lines.push('');
     }
     // Config issues
@@ -668,7 +668,7 @@ export function formatReport(report, json) {
     lines.push(colors.gray('━'.repeat(60)));
     if (report.hasConflicts) {
         lines.push(`${colors.yellow('⚠')} Potential conflicts detected`);
-        lines.push(`${colors.gray('Review the issues above and run /oh-my-claudecode:omc-setup if needed')}`);
+        lines.push(`${colors.gray('Review the issues above and run /omc-han:omc-setup if needed')}`);
     }
     else {
         lines.push(`${colors.green('✓')} No conflicts detected`);

@@ -10,7 +10,7 @@ Use this built-in reference when you need detailed OMC catalog information that 
 
 ## Agent Catalog
 
-Prefix: `oh-my-claudecode:`. See `agents/*.md` for full prompts.
+Prefix: `omc-han:`. See `agents/*.md` for full prompts.
 
 - `explore` (haiku) — fast codebase search and mapping
 - `analyst` (opus) — requirements clarity and hidden constraints
@@ -67,7 +67,7 @@ Prefix: `oh-my-claudecode:`. See `agents/*.md` for full prompts.
 
 ## Skills Registry
 
-Invoke built-in workflows via `/oh-my-claudecode:<name>`.
+Invoke built-in workflows via `/omc-han:<name>`.
 
 ### Workflow skills
 - `autopilot` — full autonomous execution from idea to working code

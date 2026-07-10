@@ -4,7 +4,7 @@ description: ""
 
 # OMC ccg
 
-This compatibility command keeps `/oh-my-claudecode:ccg` available without loading the full `ccg` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:ccg` available without loading the full `ccg` skill description in every Claude Code session.
 
 ## Dispatch
 

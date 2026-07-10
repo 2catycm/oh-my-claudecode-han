@@ -6,36 +6,36 @@ level: 2
 
 # Setup
 
-Use `/oh-my-claudecode:setup` as the unified setup/configuration entrypoint.
+Use `/omc-han:setup` as the unified setup/configuration entrypoint.
 
 ## Usage
 
 ```bash
-/oh-my-claudecode:setup                # full setup wizard
-/oh-my-claudecode:setup doctor         # installation diagnostics
-/oh-my-claudecode:setup mcp            # MCP server configuration
-/oh-my-claudecode:setup wizard --local # explicit wizard path
+/omc-han:setup                # full setup wizard
+/omc-han:setup doctor         # installation diagnostics
+/omc-han:setup mcp            # MCP server configuration
+/omc-han:setup wizard --local # explicit wizard path
 ```
 
 ## Routing
 
 Process the request by the **first argument only** so install/setup questions land on the right flow immediately:
 
-- No argument, `wizard`, `local`, `global`, or `--force` -> route to `/oh-my-claudecode:omc-setup` with the same remaining args
-- `doctor` -> route to `/oh-my-claudecode:omc-doctor` with everything after the `doctor` token
-- `mcp` -> route to `/oh-my-claudecode:mcp-setup` with everything after the `mcp` token
+- No argument, `wizard`, `local`, `global`, or `--force` -> route to `/omc-han:omc-setup` with the same remaining args
+- `doctor` -> route to `/omc-han:omc-doctor` with everything after the `doctor` token
+- `mcp` -> route to `/omc-han:mcp-setup` with everything after the `mcp` token
 
 Examples:
 
 ```bash
-/oh-my-claudecode:setup --local          # => /oh-my-claudecode:omc-setup --local
-/oh-my-claudecode:setup doctor --json    # => /oh-my-claudecode:omc-doctor --json
-/oh-my-claudecode:setup mcp github       # => /oh-my-claudecode:mcp-setup github
+/omc-han:setup --local          # => /omc-han:omc-setup --local
+/omc-han:setup doctor --json    # => /omc-han:omc-doctor --json
+/omc-han:setup mcp github       # => /omc-han:mcp-setup github
 ```
 
 ## Notes
 
-- `/oh-my-claudecode:omc-setup`, `/oh-my-claudecode:omc-doctor`, and `/oh-my-claudecode:mcp-setup` remain valid compatibility entrypoints.
-- Prefer `/oh-my-claudecode:setup` in new documentation and user guidance.
+- `/omc-han:omc-setup`, `/omc-han:omc-doctor`, and `/omc-han:mcp-setup` remain valid compatibility entrypoints.
+- Prefer `/omc-han:setup` in new documentation and user guidance.
 
 Task: {{ARGUMENTS}}

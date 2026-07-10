@@ -4,7 +4,7 @@
  * Unified handler for persistent work modes: ultrawork, ralph, and todo-continuation.
  * This hook intercepts Stop events and enforces work continuation based on:
  * 1. Active ultrawork mode with pending todos
- * 2. Active ralph loop (until cancelled via /oh-my-claudecode:cancel)
+ * 2. Active ralph loop (until cancelled via /omc-han:cancel)
  * 3. Any pending todos (general enforcement)
  *
  * Priority order: Ralph > Ultrawork > Todo Continuation
@@ -920,7 +920,7 @@ async function checkRalphLoop(sessionId, directory, cancelInProgress) {
         writeRalphState(workingDir, state, sessionId);
         return {
             shouldBlock: true,
-            message: `[RALPH - HARD LIMIT] Reached hard max iterations (${hardMax}). Mode auto-disabled. Restart with /oh-my-claudecode:ralph if needed.`,
+            message: `[RALPH - HARD LIMIT] Reached hard max iterations (${hardMax}). Mode auto-disabled. Restart with /omc-han:ralph if needed.`,
             mode: 'ralph',
             metadata: { iteration: state.iteration, maxIterations: state.max_iterations }
         };
@@ -962,7 +962,7 @@ CRITICAL INSTRUCTIONS:
 1. Review your progress and the original task
 ${prdInstruction}
 3. Continue from where you left off
-4. When FULLY complete (after ${state.critic_mode === 'codex' ? 'Codex critic' : state.critic_mode === 'critic' ? 'Critic' : 'Architect'} verification), run \`/oh-my-claudecode:cancel\` to cleanly exit and clean up state files. If cancel fails, retry with \`/oh-my-claudecode:cancel --force\`.
+4. When FULLY complete (after ${state.critic_mode === 'codex' ? 'Codex critic' : state.critic_mode === 'critic' ? 'Critic' : 'Architect'} verification), run \`/omc-han:cancel\` to cleanly exit and clean up state files. If cancel fails, retry with \`/omc-han:cancel --force\`.
 5. Do NOT stop until the task is truly done
 
 ${newState.prompt ? `Original task: ${truncatePromptForEcho(newState.prompt)}` : ''}
@@ -1265,7 +1265,7 @@ async function checkTeamPipeline(sessionId, directory, cancelInProgress) {
 
 The team pipeline is active in phase "${phase}". Continue working on the team workflow.
 Do not stop until the pipeline reaches a terminal state (complete/failed/cancelled).
-When done, run \`/oh-my-claudecode:cancel\` to cleanly exit.
+When done, run \`/omc-han:cancel\` to cleanly exit.
 
 </team-pipeline-continuation>
 
@@ -1485,7 +1485,7 @@ async function checkRalplan(sessionId, directory, cancelInProgress) {
 The ralplan consensus workflow is active. Continue the Planner/Architect/Critic planning loop only.
 Ralplan is read-only/planning mode: do not implement, invoke execution skills, edit source, commit, push, or open PRs from this continuation.
 When consensus is reached, stop at a pending-approval handoff and require explicit user approval before execution.
-When done, run \`/oh-my-claudecode:cancel\` to cleanly exit.
+When done, run \`/omc-han:cancel\` to cleanly exit.
 
 </ralplan-continuation>
 
@@ -1539,7 +1539,7 @@ async function checkUltrawork(sessionId, directory, _hasIncompleteTodos, cancelI
         deactivateUltrawork(workingDir, sessionId);
         return {
             shouldBlock: true,
-            message: '[ULTRAWORK - HARD LIMIT] Reached hard max iterations (' + hardMax + '). Mode auto-disabled. Restart with /oh-my-claudecode:ultrawork if needed.',
+            message: '[ULTRAWORK - HARD LIMIT] Reached hard max iterations (' + hardMax + '). Mode auto-disabled. Restart with /omc-han:ultrawork if needed.',
             mode: 'ultrawork',
             metadata: { reinforcementCount: state.reinforcement_count }
         };

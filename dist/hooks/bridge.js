@@ -895,7 +895,7 @@ function getPromptText(input) {
     return "";
 }
 function isExplicitAskSlashInvocation(promptText) {
-    return /^\s*\/(?:oh-my-claudecode:)?ask\s+(?:claude|codex|gemini|antigravity|agy|grok|cursor)\b/i.test(promptText);
+    return /^\s*\/(?:omc-han:)?ask\s+(?:claude|codex|gemini|antigravity|agy|grok|cursor)\b/i.test(promptText);
 }
 function activateRalplanStartupState(directory, sessionId) {
     const now = new Date().toISOString();
@@ -927,7 +927,7 @@ function resolveWorkflowSlotModeStatePath(directory, skillName, sessionId) {
 function seedWorkflowSlotForSkill(directory, skillName, sessionId, source, parentSkill) {
     if (!isCanonicalWorkflowSkill(skillName))
         return false;
-    const normalized = skillName.toLowerCase().replace(/^oh-my-claudecode:/, "");
+    const normalized = skillName.toLowerCase().replace(/^omc-han:/, "");
     try {
         const current = readSkillActiveStateNormalized(directory, sessionId);
         const pruned = pruneExpiredWorkflowSkillTombstones(current);
@@ -963,7 +963,7 @@ function seedWorkflowSlotForSkill(directory, skillName, sessionId, source, paren
 function confirmWorkflowSlot(directory, skillName, sessionId) {
     if (!isCanonicalWorkflowSkill(skillName))
         return false;
-    const normalized = skillName.toLowerCase().replace(/^oh-my-claudecode:/, "");
+    const normalized = skillName.toLowerCase().replace(/^omc-han:/, "");
     try {
         const current = readSkillActiveStateNormalized(directory, sessionId);
         const slot = current.active_skills[normalized];
@@ -986,7 +986,7 @@ function confirmWorkflowSlot(directory, skillName, sessionId) {
 function tombstoneWorkflowSlot(directory, skillName, sessionId) {
     if (!isCanonicalWorkflowSkill(skillName))
         return false;
-    const normalized = skillName.toLowerCase().replace(/^oh-my-claudecode:/, "");
+    const normalized = skillName.toLowerCase().replace(/^omc-han:/, "");
     try {
         const current = readSkillActiveStateNormalized(directory, sessionId);
         if (!current.active_skills[normalized])
@@ -2059,7 +2059,7 @@ function getInvokedSkillName(toolInput) {
 }
 /**
  * Extract the raw (un-normalized) skill name from Skill tool input.
- * Used to distinguish OMC built-in skills (prefixed with 'oh-my-claudecode:')
+ * Used to distinguish OMC built-in skills (prefixed with 'omc-han:')
  * from project custom skills or other plugin skills with the same bare name.
  * See: https://github.com/Yeachan-Heo/oh-my-claudecode/issues/1581
  */
@@ -2074,7 +2074,7 @@ async function processPostToolUse(input) {
     const directory = resolveToWorktreeRoot(input.directory);
     const messages = [];
     // Ensure mode state activation also works when execution starts via Skill tool
-    // (e.g., ralplan consensus handoff into Skill("oh-my-claudecode:ralph")).
+    // (e.g., ralplan consensus handoff into Skill("omc-han:ralph")).
     const toolName = (input.toolName || "").toLowerCase();
     if (toolName === "skill") {
         const skillName = getInvokedSkillName(input.toolInput);
@@ -2099,7 +2099,7 @@ async function processPostToolUse(input) {
         const currentState = readSkillActiveState(directory, input.sessionId);
         const completingSkill = (getInvokedSkillName(input.toolInput) ?? "")
             .toLowerCase()
-            .replace(/^oh-my-claudecode:/, "");
+            .replace(/^omc-han:/, "");
         if (!currentState || !currentState.active || currentState.skill_name === completingSkill) {
             clearSkillActiveState(directory, input.sessionId);
         }

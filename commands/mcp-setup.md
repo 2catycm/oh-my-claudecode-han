@@ -4,7 +4,7 @@ description: ""
 
 # OMC mcp-setup
 
-This compatibility command keeps `/oh-my-claudecode:mcp-setup` available without loading the full `mcp-setup` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:mcp-setup` available without loading the full `mcp-setup` skill description in every Claude Code session.
 
 ## Dispatch
 

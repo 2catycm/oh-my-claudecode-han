@@ -215,7 +215,7 @@ export function isExplicitCancelCommand(context) {
         return false;
     const prompt = (context.prompt ?? '').trim();
     if (prompt) {
-        const slashCancelPattern = /^\/(?:oh-my-claudecode:)?cancel(?:\s+--force)?\s*$/i;
+        const slashCancelPattern = /^\/(?:omc-han:)?cancel(?:\s+--force)?\s*$/i;
         const keywordCancelPattern = /^(?:cancelomc|stopomc)\s*$/i;
         if (slashCancelPattern.test(prompt) || keywordCancelPattern.test(prompt)) {
             return true;
@@ -238,7 +238,7 @@ export function isExplicitCancelCommand(context) {
     const toolInput = (context.tool_input ?? context.toolInput);
     if (toolName.includes('skill') && toolInput && typeof toolInput.skill === 'string') {
         const skill = toolInput.skill.toLowerCase();
-        if (skill === 'oh-my-claudecode:cancel' || skill.endsWith(':cancel')) {
+        if (skill === 'omc-han:cancel' || skill.endsWith(':cancel')) {
             return true;
         }
     }

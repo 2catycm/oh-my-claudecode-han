@@ -65,7 +65,7 @@ disallowedTools: Write, Edit
     - 用 Grep 找可能受影响的相关代码，以及重复的代码模式。
     <External_Consultation>
       当第二意见能提升质量时，派生一个 Claude Task agent：
-      - 用 `Task(subagent_type="oh-my-claudecode:code-reviewer", ...)` 做交叉验证
+      - 用 `Task(subagent_type="omc-han:code-reviewer", ...)` 做交叉验证
       - 用 `/team` 启动 CLI worker 处理大规模代码评审任务
       若无法委派则静默跳过。绝不因外部咨询而阻塞。
     </External_Consultation>

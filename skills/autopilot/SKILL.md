@@ -38,7 +38,7 @@ level: 4
 - 阶段内尽可能并行执行（第 2 阶段和第 4 阶段）
 - QA 循环最多重复 5 次；若同一错误连续 3 次出现，停下并报告根本问题
 - 验收需所有评审员批准；被驳回的条目修复后重新验收
-- 随时可用 `/oh-my-claudecode:cancel` 取消；进度会保留以便恢复
+- 随时可用 `/omc-han:cancel` 取消；进度会保留以便恢复
 </Execution_Policy>
 
 <Steps>
@@ -75,13 +75,13 @@ level: 4
 
 6. **Phase 5 - 清理**：成功完成后删除所有状态文件
    - 移除 `.omc/state/autopilot-state.json`、`ralph-state.json`、`ultrawork-state.json`、`ultraqa-state.json`
-   - 运行 `/oh-my-claudecode:cancel` 干净退出
+   - 运行 `/omc-han:cancel` 干净退出
 </Steps>
 
 <Tool_Usage>
-- Use `Task(subagent_type="oh-my-claudecode:architect", ...)` for Phase 4 architecture validation
-- Use `Task(subagent_type="oh-my-claudecode:security-reviewer", ...)` for Phase 4 security review
-- Use `Task(subagent_type="oh-my-claudecode:code-reviewer", ...)` for Phase 4 quality review
+- Use `Task(subagent_type="omc-han:architect", ...)` for Phase 4 architecture validation
+- Use `Task(subagent_type="omc-han:security-reviewer", ...)` for Phase 4 security review
+- Use `Task(subagent_type="omc-han:code-reviewer", ...)` for Phase 4 quality review
 - Agents form their own analysis first, then spawn Claude Task agents for cross-validation
 - Never block on external tools; proceed with available agents if delegation fails
 </Tool_Usage>
@@ -181,7 +181,7 @@ Limitations:
 
 ## Resume
 
-If autopilot was cancelled or failed, run `/oh-my-claudecode:autopilot` again to resume from where it stopped.
+If autopilot was cancelled or failed, run `/omc-han:autopilot` again to resume from where it stopped.
 
 ## Best Practices for Input
 

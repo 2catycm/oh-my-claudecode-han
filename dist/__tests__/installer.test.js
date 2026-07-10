@@ -165,7 +165,7 @@ describe('Installer Constants', () => {
                 const commandName = file.replace('.md', '');
                 const content = readFileSync(join(commandsDir, file), 'utf-8');
                 // Detect pattern: command file that tells user to invoke the same-named skill
-                const skillInvokePattern = new RegExp(`/oh-my-claudecode:${commandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+                const skillInvokePattern = new RegExp(`/omc-han:${commandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
                 if (skillInvokePattern.test(content) && content.toLowerCase().includes('deprecated')) {
                     selfReferentialStubs.push(file);
                 }

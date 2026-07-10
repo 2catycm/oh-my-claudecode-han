@@ -1235,7 +1235,7 @@ Examples:
         if (reportedVersion !== version) {
             console.log(chalk.gray(`CLI package version: ${version}`));
         }
-        console.log(chalk.gray('Start Claude Code and use /oh-my-claudecode:omc-setup for interactive setup.'));
+        console.log(chalk.gray('Start Claude Code and use /omc-han:omc-setup for interactive setup.'));
     }
 });
 /**

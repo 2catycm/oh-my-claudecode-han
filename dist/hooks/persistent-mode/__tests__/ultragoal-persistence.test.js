@@ -91,7 +91,7 @@ describe('ultragoal persistence and Claude /goal enforcement', () => {
             cwd,
             session_id: 'session-a',
             tool_name: 'Skill',
-            tool_input: { skill: 'oh-my-claudecode:cancel' },
+            tool_input: { skill: 'omc-han:cancel' },
         });
         const clearState = runHook(preToolScript, {
             cwd,

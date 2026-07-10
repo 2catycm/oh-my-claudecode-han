@@ -11,12 +11,12 @@ level: 4
 
 # Ralplan (Consensus Planning Alias)
 
-Ralplan is a shorthand alias for `/oh-my-claudecode:plan --consensus`. It triggers iterative planning with Planner, Architect, and Critic agents until consensus is reached, with **RALPLAN-DR structured deliberation** (short mode by default, deliberate mode for high-risk work).
+Ralplan is a shorthand alias for `/omc-han:plan --consensus`. It triggers iterative planning with Planner, Architect, and Critic agents until consensus is reached, with **RALPLAN-DR structured deliberation** (short mode by default, deliberate mode for high-risk work).
 
 ## Usage
 
 ```
-/oh-my-claudecode:ralplan "task description"
+/omc-han:ralplan "task description"
 ```
 
 ## Flags
@@ -29,7 +29,7 @@ Ralplan is a shorthand alias for `/oh-my-claudecode:plan --consensus`. It trigge
 ## Usage with interactive mode
 
 ```
-/oh-my-claudecode:ralplan --interactive "task description"
+/omc-han:ralplan --interactive "task description"
 ```
 
 ## Behavior
@@ -41,7 +41,7 @@ Ralplan is a planning module. It may inspect context and draft or update plan/sp
 This skill invokes the Plan skill in consensus mode:
 
 ```
-/oh-my-claudecode:plan --consensus <arguments>
+/omc-han:plan --consensus <arguments>
 ```
 
 The consensus workflow:
@@ -64,7 +64,7 @@ The consensus workflow:
    f. If 5 iterations are reached without `APPROVE`, present the best version to the user
 6. On Critic approval, mark the plan `pending approval` unless explicit execution approval has already been captured. *(--interactive only)* If `--interactive` is set, use `AskUserQuestion` to present the plan with approval options (Approve execution via team (Recommended) / Approve execution via ralph / Compact then return for execution approval / Request changes / Reject). Final plan must include ADR (Decision, Drivers, Alternatives considered, Why chosen, Consequences, Follow-ups). Otherwise, output the final plan and stop before any mutation or delegation.
 7. *(--interactive only)* User chooses: Approve (team or ralph), Request changes, or Reject
-8. *(--interactive only)* On approval: invoke `Skill("oh-my-claudecode:team")` for parallel team execution (recommended) or `Skill("oh-my-claudecode:ralph")` for sequential execution -- never implement directly
+8. *(--interactive only)* On approval: invoke `Skill("omc-han:team")` for parallel team execution (recommended) or `Skill("omc-han:ralph")` for sequential execution -- never implement directly
 
 > **Important:** Steps 3 and 4 MUST run sequentially. Do NOT issue both agent Task calls in the same parallel batch. Always await the Architect result before issuing the Critic Task.
 

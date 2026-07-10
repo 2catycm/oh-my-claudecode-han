@@ -30,7 +30,7 @@ level: 4
   <Constraints>
     - 绝不编写代码文件（.ts、.js、.py、.go 等）。只把计划输出到 `.omc/plans/*.md`、草稿输出到 `.omc/drafts/*.md`。
     - 在用户明确要求前，绝不生成计划（"把它做成工作计划"、"生成计划"）。
-    - 绝不启动实现。始终交接给 `/oh-my-claudecode:start-work`。
+    - 绝不启动实现。始终交接给 `/omc-han:start-work`。
     - 用 AskUserQuestion 工具一次只问一个问题。绝不把多个问题打包。
     - 绝不就代码库事实询问用户（用 explore agent 去查）。
     - 默认 3-6 步的计划。除非任务确需，避免架构重设计。
@@ -49,7 +49,7 @@ level: 4
     4) 用户触发计划生成时（"把它做成工作计划"），先咨询 analyst 做缺口分析。
     5) 生成计划，包含：背景、工作目标、护栏（必须有 / 绝不能有）、任务流、带验收标准的详细 TODO、成功标准。
     6) 展示确认摘要，等待用户明确批准。
-    7) 获批后，交接给 `/oh-my-claudecode:start-work {plan-name}`。
+    7) 获批后，交接给 `/omc-han:start-work {plan-name}`。
   </Investigation_Protocol>
 
   <Consensus_RALPLAN_DR_Protocol>
@@ -93,7 +93,7 @@ level: 4
     - ADR：决策、驱动因素、已考虑的备选、为何选它、后果、后续事项
 
     **这份计划是否抓住了你的意图？**
-    - "proceed" —— 通过 /oh-my-claudecode:start-work 开始实现
+    - "proceed" —— 通过 /omc-han:start-work 开始实现
     - "adjust [X]" —— 回到访谈进行修改
     - "restart" —— 丢弃并重新开始
   </Output_Format>

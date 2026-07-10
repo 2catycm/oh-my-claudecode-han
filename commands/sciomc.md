@@ -4,7 +4,7 @@ description: ""
 
 # OMC sciomc
 
-This compatibility command keeps `/oh-my-claudecode:sciomc` available without loading the full `sciomc` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:sciomc` available without loading the full `sciomc` skill description in every Claude Code session.
 
 ## Dispatch
 

@@ -54,14 +54,14 @@ describe('renderSkills', () => {
         });
     });
     describe('namespaced skill names', () => {
-        it('displays only last segment for namespaced skills (oh-my-claudecode:plan)', () => {
-            const lastSkill = { name: 'oh-my-claudecode:plan', timestamp: new Date() };
+        it('displays only last segment for namespaced skills (omc-han:plan)', () => {
+            const lastSkill = { name: 'omc-han:plan', timestamp: new Date() };
             const result = renderSkills(inactiveUltrawork, inactiveRalph, lastSkill);
             expect(result).toContain('skill:plan');
             expect(result).not.toContain('oh-my-claudecode');
         });
         it('displays only last segment for namespaced skills with args', () => {
-            const lastSkill = { name: 'oh-my-claudecode:autopilot', args: 'build app', timestamp: new Date() };
+            const lastSkill = { name: 'omc-han:autopilot', args: 'build app', timestamp: new Date() };
             const result = renderSkills(inactiveUltrawork, inactiveRalph, lastSkill);
             expect(result).toContain('skill:autopilot(build app)');
             expect(result).not.toContain('oh-my-claudecode');
@@ -106,14 +106,14 @@ describe('renderLastSkill', () => {
         });
     });
     describe('namespaced skill names', () => {
-        it('displays only last segment for namespaced skills (oh-my-claudecode:plan)', () => {
-            const lastSkill = { name: 'oh-my-claudecode:plan', timestamp: new Date() };
+        it('displays only last segment for namespaced skills (omc-han:plan)', () => {
+            const lastSkill = { name: 'omc-han:plan', timestamp: new Date() };
             const result = renderLastSkill(lastSkill);
             expect(result).toContain('skill:plan');
             expect(result).not.toContain('oh-my-claudecode');
         });
         it('displays only last segment for namespaced skills with args', () => {
-            const lastSkill = { name: 'oh-my-claudecode:autopilot', args: 'build app', timestamp: new Date() };
+            const lastSkill = { name: 'omc-han:autopilot', args: 'build app', timestamp: new Date() };
             const result = renderLastSkill(lastSkill);
             expect(result).toContain('skill:autopilot(build app)');
             expect(result).not.toContain('oh-my-claudecode');

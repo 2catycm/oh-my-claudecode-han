@@ -4,7 +4,7 @@ description: ""
 
 # OMC omc-setup
 
-This compatibility command keeps `/oh-my-claudecode:omc-setup` available without loading the full `omc-setup` skill description in every Claude Code session.
+This compatibility command keeps `/omc-han:omc-setup` available without loading the full `omc-setup` skill description in every Claude Code session.
 
 ## Dispatch
 

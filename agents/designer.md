@@ -51,7 +51,7 @@ level: 2
     - 用 Bash 跑开发服务器或构建以验证实现。
     <External_Consultation>
       当第二意见能提升质量时，派生一个 Claude Task agent：
-      - 用 `Task(subagent_type="oh-my-claudecode:designer", ...)` 做 UI/UX 交叉验证
+      - 用 `Task(subagent_type="omc-han:designer", ...)` 做 UI/UX 交叉验证
       - 用 `/team` 启动 CLI worker 处理大规模前端工作
       若无法委派则静默跳过。绝不因外部咨询而阻塞。
     </External_Consultation>

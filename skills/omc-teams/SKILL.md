@@ -14,12 +14,12 @@ Spawn N CLI worker processes in tmux panes to execute tasks in parallel. Support
 ## Usage
 
 ```bash
-/oh-my-claudecode:omc-teams N:claude "task description"
-/oh-my-claudecode:omc-teams N:codex "task description"
-/oh-my-claudecode:omc-teams N:gemini "task description"
-/oh-my-claudecode:omc-teams N:antigravity "task description"
-/oh-my-claudecode:omc-teams N:grok "task description"
-/oh-my-claudecode:omc-teams N:cursor "implementation task description"
+/omc-han:omc-teams N:claude "task description"
+/omc-han:omc-teams N:codex "task description"
+/omc-han:omc-teams N:gemini "task description"
+/omc-han:omc-teams N:antigravity "task description"
+/omc-han:omc-teams N:grok "task description"
+/omc-han:omc-teams N:cursor "implementation task description"
 ```
 
 ### Parameters
@@ -83,7 +83,7 @@ Validate before decomposing or running anything:
 - Reject unsupported agent types up front. `/omc-teams` only supports **`claude`**, **`codex`**, **`gemini`**, **`antigravity`**, **`grok`**, and **`cursor`**.
 - Treat Cursor workers as executor-style only. Accept `N:cursor` and `N:cursor:executor`; reject or reframe reviewer, critic, security-reviewer, verdict, or final-approval work onto native Claude/OMC reviewer agents.
 - If the user asks for an unsupported type such as `expert`, explain that `/omc-teams` launches external CLI workers only.
-- For native Claude Code team agents/roles, direct them to **`/oh-my-claudecode:team`** instead.
+- For native Claude Code team agents/roles, direct them to **`/omc-han:team`** instead.
 
 ### Phase 2: Decompose task
 
@@ -185,7 +185,7 @@ If encountered, switch to `omc team ...` CLI commands.
 | ---------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------- |
 | `not inside tmux`            | Requested in-place pane topology from a non-tmux surface | Start tmux and rerun, or let `omc team` use its detached-session fallback           |
 | `cmux surface detected`      | Running inside cmux without `$TMUX` | Use the normal `omc team ...` flow; OMC will create native cmux worker splits      |
-| `Unsupported agent type`     | Requested agent is not claude/codex/gemini/antigravity/grok/cursor | Use `claude`, `codex`, `gemini`, `antigravity`, `grok`, or `cursor`; for native Claude Code agents use `/oh-my-claudecode:team` |
+| `Unsupported agent type`     | Requested agent is not claude/codex/gemini/antigravity/grok/cursor | Use `claude`, `codex`, `gemini`, `antigravity`, `grok`, or `cursor`; for native Claude Code agents use `/omc-han:team` |
 | `codex: command not found`   | Codex CLI not installed             | `npm install -g @openai/codex`                                                      |
 | `gemini: command not found`  | Gemini CLI not installed            | `npm install -g @google/gemini-cli` (enterprise/API-key tier)                       |
 | `agy: command not found`     | Antigravity CLI not installed       | Install per the [official instructions](https://antigravity.google)                |
