@@ -54,19 +54,19 @@ MODES:
     - If already configured, offers quick update option
 
   Local Configuration (--local)
-    - Invokes the plugin-local coordinator through `scripts/setup-claude-md.sh`; the shell validates the coordinator response and its exit status before any post-install work
-    - Reports coordinator-created byte-identical backups only for files that required mutation
-    - Project-specific settings
-    - Use this to update project config after OMC upgrades
+    - 通过 `scripts/setup-claude-md.sh` 调用插件本地协调器；shell 在执行任何安装后续工作之前会验证协调器响应及其退出状态
+    - 仅对需要变更的文件报告协调器创建的逐字节一致备份
+    - 项目级配置
+    - 在 OMC 升级后使用此选项更新项目配置
 
   Global Configuration (--global)
-    - Invokes the plugin-local coordinator through `scripts/setup-claude-md.sh`; the shell validates the coordinator response and its exit status before any post-install work
-    - Reports coordinator-created byte-identical backups only for changed global files
-    - Default: explicitly overwrites ~/.claude/CLAUDE.md so plain `claude` also uses OMC
-    - Optional preserve mode keeps the user's base `CLAUDE.md` and installs OMC into `CLAUDE-omc.md` for `omc` launches
-    - Applies to all Claude Code sessions
-    - Preserves same-named legacy hook files unless their exact historical contents are independently verified
-    - Use this to update global config after OMC upgrades
+    - 通过 `scripts/setup-claude-md.sh` 调用插件本地协调器；shell 在执行任何安装后续工作之前会验证协调器响应及其退出状态
+    - 仅对已变更的全局文件报告协调器创建的逐字节一致备份
+    - 默认：显式覆盖 ~/.claude/CLAUDE.md，使普通 `claude` 命令也使用 OMC
+    - 可选保留模式：保留用户原有的 `CLAUDE.md`，将 OMC 安装到 `CLAUDE-omc.md` 供 `omc` 启动时使用
+    - 应用于所有 Claude Code 会话
+    - 保留同名旧版钩子文件，除非其精确的历史内容已被独立验证
+    - 在 OMC 升级后使用此选项更新全局配置
 
   Force Full Setup (--force)
     - Bypasses the "already configured" check
@@ -85,13 +85,13 @@ For more info: https://github.com/Yeachan-Heo/oh-my-claudecode
 
 ## Setup Invocation
 
-Do not independently scan plugin cache directories or select a plugin root in this skill. Invoke the setup script from the plugin root supplied by the running plugin environment:
+不要在本 skill 中独立扫描插件缓存目录或选择插件根目录。通过运行中的插件环境提供的插件根目录调用设置脚本：
 
 ```bash
 bash "${OMC_SETUP_PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT}}/scripts/setup-claude-md.sh" <local|global> [overwrite|preserve]
 ```
 
-The script is the sole cache resolver. It accepts only complete plugin roots (canonical `docs/CLAUDE.md`, coordinator artifact, and `omc-reference` skill), chooses a strict full-SemVer cache version, verifies the compiled-source handshake, and fails closed on coordinator protocol or status disagreement. Do not download configuration or mutate `CLAUDE.md` outside that coordinator.
+该脚本是唯一的缓存解析器。它仅接受完整的插件根目录（包含规范的 `docs/CLAUDE.md`、协调器制品和 `omc-reference` skill），选择严格的完整 SemVer 缓存版本，验证编译源握手，并在协调器协议或状态不一致时安全失败。不要在该协调器之外下载配置或变更 `CLAUDE.md`。
 
 ## Pre-Setup Check: Already Configured?
 
@@ -122,7 +122,7 @@ Use AskUserQuestion to prompt:
 **Question:** "OMC is already configured. What would you like to do?"
 
 **Options:**
-1. **Update CLAUDE.md only** - Install the active plugin's canonical CLAUDE.md without re-running full setup
+1. **Update CLAUDE.md only** - 安装当前活跃插件的规范 CLAUDE.md，无需重新运行完整设置
 2. **Run full setup again** - Go through the complete setup wizard
 3. **Cancel** - Exit without changes
 
