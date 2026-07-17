@@ -1,0 +1,211 @@
+name: Auto Sync Upstream
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      force_translate:
+        description: 'Force re-translate all files even if no upstream changes'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-and-translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/Yeachan-Heo/oh-my-claudecode.git || true
+
+      - name: Fetch upstream
+        run: git fetch upstream main
+
+      - name: Detect new upstream commits
+        id: detect
+        run: |
+          LAST_MERGE=$(git log --oneline --grep="chore(release): merge dev" -1 --format="%H" || git log --oneline --grep="Merge.*upstream" -1 --format="%H" || echo "")
+          if [ -z "$LAST_MERGE" ]; then
+            LAST_MERGE=$(git merge-base HEAD upstream/main)
+          fi
+          echo "last_merge=$LAST_MERGE" >> $GITHUB_OUTPUT
+
+          NEW_COMMITS=$(git rev-list --count ${LAST_MERGE}..upstream/main 2>/dev/null || echo "0")
+          echo "new_commits=$NEW_COMMITS" >> $GITHUB_OUTPUT
+
+          if [ "$NEW_COMMITS" -eq "0" ] && [ "${{ inputs.force_translate }}" != "true" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "No new upstream commits."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "Found $NEW_COMMITS new upstream commits."
+          fi
+
+      - name: Check for existing sync PR
+        if: steps.detect.outputs.skip != 'true'
+        id: existing_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTING=$(gh pr list --head "auto-sync/" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            echo "pr_number=$EXISTING" >> $GITHUB_OUTPUT
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create sync branch
+        if: steps.detect.outputs.skip != 'true'
+        run: |
+          BRANCH="auto-sync/upstream-$(date +%Y%m%d)"
+          echo "SYNC_BRANCH=$BRANCH" >> $GITHUB_ENV
+          git checkout -b "$BRANCH"
+
+      - name: Merge upstream
+        if: steps.detect.outputs.skip != 'true'
+        id: merge
+        run: |
+          if git merge upstream/main --no-edit -m "chore(sync): merge upstream/main"; then
+            echo "conflict=false" >> $GITHUB_OUTPUT
+          else
+            echo "conflict=true" >> $GITHUB_OUTPUT
+            git add -A
+            git commit --no-edit -m "chore(sync): merge upstream/main (with conflicts)" || true
+          fi
+
+      - name: Identify changed translatable files
+        if: steps.detect.outputs.skip != 'true'
+        id: changed
+        run: |
+          LAST_MERGE="${{ steps.detect.outputs.last_merge }}"
+          CHANGED_FILES=$(git diff --name-only ${LAST_MERGE}..upstream/main -- \
+            'agents/*.md' \
+            'skills/*/SKILL.md' \
+            'skills/AGENTS.md' \
+            'CLAUDE.md' \
+            'docs/CLAUDE.md' \
+            '.github/CLAUDE.md' \
+          )
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          FILE_COUNT=$(echo "$CHANGED_FILES" | grep -c . || echo "0")
+          echo "count=$FILE_COUNT" >> $GITHUB_OUTPUT
+          echo "Changed translatable files: $FILE_COUNT"
+
+      - name: Run translation
+        if: steps.detect.outputs.skip != 'true' && steps.changed.outputs.count != '0'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CHANGED_FILES: ${{ steps.changed.outputs.files }}
+          LAST_MERGE_SHA: ${{ steps.detect.outputs.last_merge }}
+          HAS_CONFLICTS: ${{ steps.merge.outputs.conflict }}
+        run: node scripts/translate-upstream-changes.mjs
+
+      - name: Commit translations
+        if: steps.detect.outputs.skip != 'true'
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No translation changes to commit"
+          else
+            git commit -m "docs(l10n): auto-translate upstream changes $(date +%Y-%m-%d)"
+          fi
+
+      - name: Push branch
+        if: steps.detect.outputs.skip != 'true'
+        run: git push -u origin "$SYNC_BRANCH" --force
+
+      - name: Create or update Pull Request
+        if: steps.detect.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LAST_MERGE="${{ steps.detect.outputs.last_merge }}"
+          HAS_CONFLICTS="${{ steps.merge.outputs.conflict }}"
+          NEW_COMMITS="${{ steps.detect.outputs.new_commits }}"
+
+          # Build upstream log
+          UPSTREAM_LOG=$(git log --oneline ${LAST_MERGE}..upstream/main | head -30)
+
+          # Read translation summary if available
+          TRANSLATED=""
+          ERRORS=""
+          if [ -f .translation-summary.json ]; then
+            TRANSLATED=$(cat .translation-summary.json | node -e "
+              const d=JSON.parse(require('fs').readFileSync(0,'utf-8'));
+              d.translated.forEach(f=>console.log('- '+f));
+            " 2>/dev/null || echo "")
+            ERRORS=$(cat .translation-summary.json | node -e "
+              const d=JSON.parse(require('fs').readFileSync(0,'utf-8'));
+              d.errors.forEach(f=>console.log('- '+f));
+              d.conflicts.forEach(f=>console.log('- '+f+' (merge conflict)'));
+            " 2>/dev/null || echo "")
+          fi
+
+          CONFLICT_NOTE="Clean merge"
+          if [ "$HAS_CONFLICTS" = "true" ]; then
+            CONFLICT_NOTE="CONFLICTS DETECTED — manual resolution required"
+          fi
+
+          BODY=$(cat <<EOF
+          ## Upstream Sync ($NEW_COMMITS new commits)
+
+          ### Upstream commits
+          \`\`\`
+          $UPSTREAM_LOG
+          \`\`\`
+
+          ### Translated files
+          $TRANSLATED
+
+          ### Issues
+          $ERRORS
+
+          ### Merge status
+          $CONFLICT_NOTE
+
+          ---
+          *Auto-generated by auto-sync workflow*
+          EOF
+          )
+
+          if [ "${{ steps.existing_pr.outputs.exists }}" = "true" ]; then
+            gh pr comment "${{ steps.existing_pr.outputs.pr_number }}" --body "Updated with latest upstream changes."
+          else
+            LABELS="auto-sync,l10n"
+            if [ "$HAS_CONFLICTS" = "true" ]; then
+              LABELS="$LABELS,needs-manual-resolution"
+            fi
+            gh pr create \
+              --base main \
+              --head "$SYNC_BRANCH" \
+              --title "chore(l10n): sync upstream $(date +%Y-%m-%d)" \
+              --body "$BODY" \
+              --label "$LABELS"
+          fi
